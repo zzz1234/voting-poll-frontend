@@ -1,0 +1,44 @@
+/* Write CSS for class new-poll to center align the form and add some margin to it */
+.new-poll {
+    margin: 0 auto;
+    width: 50%;
+}
+
+/* Write CSS for class input-name to center align the input field and add some margin to it */
+
+.input-name {
+    margin: 5px;
+    width: 50%;
+}
+
+.input-val {
+    border-radius: 5px;
+    margin: 5px;
+    width: 50%;
+}
+
+.new-poll-form-title {
+    text-align: center;
+    margin: 10px;
+    width: 50%;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+/*Add CSS for class new-poll-form to center align the content of the div and add some margin to it. */
+
+.new-poll-form {
+    margin: 0 auto;
+    width: 50%;
+}

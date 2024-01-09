@@ -1,38 +1,53 @@
-.App {
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+}
+
+.navbar-title {
+  text-align: center;
+  font-size: 40px;
+}
+
+.button-green {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+/* Add CSS for button-group class which has multiple buttons in it. Make it center align and add some margin between buttons */
+.button-group {
+  text-align: center;
+  margin: 10px;
+}
+
+/* Add CSS for class footer to keep it at the bottom of the page, covers the entire width of the page and has some padding */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Add CSS for class fa fa-twitter to show the twitter icon in the footer */
+.fa {
+  padding: 10px;
+  font-size: 20px;
+  width: 20px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
