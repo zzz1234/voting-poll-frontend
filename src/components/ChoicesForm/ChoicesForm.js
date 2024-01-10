@@ -5,6 +5,8 @@
 
 import React, { useState } from 'react';
 
+import { addChoice } from '../../services/addChoiceService.js';
+
 import Choice from '../choice/choice.js';
 import './ChoicesForm.css';
 
@@ -37,20 +39,11 @@ export default function ChoicesForm({game_code, nextPageOnSubmit}) {
 
     const handleChoiceFormSubmit = (e) => {
         e.preventDefault()
-        const api_url = 'http://localhost:8000/api/add-choice';
         const api_body = {
             'choices': Object.values(choices_list),
             'game_id': game_code,
         }
-        console.log(choices_list);
-        console.log({game_code});
-        fetch(api_url, {
-            method: 'POST',
-            body: JSON.stringify(api_body),
-            headers: {
-            'Content-Type': 'application/json'
-            },
-        }).then(response => response.json())
+        addChoice(api_body)
         .then(data => {
             console.log('Success:', data);
             nextPageOnSubmit('poll_form');

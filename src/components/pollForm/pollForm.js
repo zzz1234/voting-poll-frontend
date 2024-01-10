@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { VoteService } from '../../services/voteService.js';
+
 export default function PollForm({game_id, user_id}) {
 
     const [game_data, setGame_data] = useState({'game_question': '', 'game_code': ''});
@@ -72,7 +74,6 @@ export default function PollForm({game_id, user_id}) {
     const castVote = (e) => {
         e.preventDefault();
         const choice_id = document.querySelector('input[name="choice"]:checked').value;
-        const api_url = 'http://localhost:8000/api/vote';
         const api_body = {
             'choice_id': choice_id,
             'user_id': user_id,
@@ -80,14 +81,7 @@ export default function PollForm({game_id, user_id}) {
             'game_id': game_id,
             'priority': 1
         }
-        console.log(api_body);
-        fetch(api_url, {
-            method: 'POST',
-            body: JSON.stringify(api_body),
-            headers: {
-            'Content-Type': 'application/json'
-            },
-        }).then(response => response.json())
+        VoteService(api_body)
         .then(data => {
             console.log('Success:', data);
             alert("Vote casted successfully!");

@@ -1,8 +1,49 @@
-export default function JoinPoll({handleJoinPollInputChange, handleJoinPollFormSubmit, joinPollFormData}) {
+import React, { useState } from 'react';
+import { getGameByCode } from '../../services/gameService';
+import { getUserByEmail } from '../../services/userService.js';
+
+export default function JoinPoll({setGame_id, setUser_id, setPage}) {
     // Function renders a small form asking for game_code and user_email and a submit button.
     // On submit, the function fetches the game_id from the game_code and the user_id from the user_email.
 
     // const [game_data, setGame_data] = useState({'game_question': '', 'game_code': ''});
+
+    const [joinPollFormData, setJoinPollFormData] = useState({
+        // Initialize form data fields
+        game_code: '',
+        user_email: '',
+      });
+    
+      const handleJoinPollInputChange = (e) => {
+        const { name, value } = e.target;
+        console.log(joinPollFormData)
+        setJoinPollFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: value,
+        }));
+      };
+    
+      const handleJoinPollFormSubmit = (e) => {
+        e.preventDefault()
+        console.log(joinPollFormData);
+    
+        Promise.all([
+          getGameByCode(joinPollFormData.game_code),
+          getUserByEmail(joinPollFormData.user_email)
+        ]).then(async([gameRes, userRes]) => {
+          const gameData = await gameRes;
+          const userData = await userRes;
+      
+          setGame_id(gameData[0]['game_id']);
+          setUser_id(userData[0]['user_id']); // Assuming you have a setUserId function to set user_id state variable
+    
+          console.log("Into the Poll Now!!");
+          setPage('poll_form');
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+      }
     
     return (
         <div>

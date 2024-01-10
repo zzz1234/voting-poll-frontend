@@ -2,7 +2,42 @@ import React, { useState } from 'react';
 
 import './NewPollForm.css';
 
-export default function NewPollForm({handleFormSubmit, handleInputChange, formData}) {
+import { createGame } from '../../services/gameService.js';
+
+export default function NewPollForm({setGame_id, setPage}) {
+
+  const [formData, setFormData] = useState({
+    // Initialize form data fields
+    game_name: '',
+    no_of_votes: '',
+    // Add more fields as needed
+  });
+
+  // const [response, setResponse] = useState(null);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = (e) => {
+      e.preventDefault()
+      console.log(formData);
+      createGame(formData)
+      .then(data => {
+          console.log('Success:', data);
+          setGame_id(data[0]['game_id']);
+          console.log(data);
+          alert("Poll created successfully!");
+          setPage('add_choices');
+      })
+      .catch((error) => {
+          console.error('Error:', error);
+      });
+  }
 
     return (
       <div className="new-poll-form">
