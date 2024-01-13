@@ -1,0 +1,24 @@
+.backButton {
+    font-weight: bold; /* Thick font */
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove border */
+    color: white; /* White text */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 50%; /* Circle shape */
+    width: 65px; /* Width of the button */
+    height: 65px; /* Height of the button */
+    padding: 10px;
+    transition: background-color 0.3s; /* Animation to change color */
+    position: absolute; /* Position the button absolutely */
+    top: 150px; /* Position at the top of the page */
+    left: 0; /* Position at the left of the page */
+}
+
+.backButton:hover {
+    background-color: #45a049; /* Green background on hover */
+}
