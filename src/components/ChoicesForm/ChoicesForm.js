@@ -27,7 +27,7 @@ export default function ChoicesForm({game_code, nextPageOnSubmit}) {
     const render_choices = () => {
         let choices = [];
         for (let i=0; i<choice_num; i++) {
-            choices.push(<Choice name={i} id={i} onChange={handleChoiceChange}/>);
+            choices.push(<div key={i}><Choice name={i} id={i} onChange={handleChoiceChange}/></div>);
         }
         return choices;
     }
@@ -60,7 +60,7 @@ export default function ChoicesForm({game_code, nextPageOnSubmit}) {
             <h1 className="choices-form-title">Add your Choices here.</h1>
             <form className='choices-form' onSubmit={handleChoiceFormSubmit}>
             {render_choices()}
-            <input class="submit-button" type="submit" value="+ Add More" onClick={addMoreChoice} />
+            <input className="submit-button" type="submit" value="+ Add More" onClick={addMoreChoice} />
             <input className="submit-button" type="submit" value="Submit" />
             </form>
         </div>

@@ -65,7 +65,7 @@ export default function PollForm({game_id, user_id}) {
     const render_choices = () => {
         let choices = [];
         for (let i=0; i<choices_data.length; i++) {
-            choices.push(<div><input type="radio" id={choices_data[i]['choice_id']} name="choice" value={choices_data[i]['choice_id']} />{choices_data[i]['choice_value']}</div>);
+            choices.push(<div key={choices_data[i]['choice_id']}><input type="radio" id={choices_data[i]['choice_id']} name="choice" value={choices_data[i]['choice_id']} />{choices_data[i]['choice_value']}</div>);
         }
         return choices;
     }

@@ -48,9 +48,9 @@ export default function JoinPoll({setGame_id, setUser_id, setPage}) {
     return (
         <div>
             <form onSubmit={handleJoinPollFormSubmit}>
-                <label for="game_code">Game Code:</label>
+                <label htmlFor="game_code">Game Code:</label>
                 <input type="text" id="game_code" name="game_code" value={joinPollFormData.game_code} onChange={handleJoinPollInputChange}/><br /><br />
-                <label for="user_email">Email:</label>
+                <label htmlFor="user_email">Email:</label>
                 <input type="text" id="user_email" name="user_email" value={joinPollFormData.user_email} onChange={handleJoinPollInputChange}/><br /><br />
                 <input type="submit" value="Submit" />
             </form>
