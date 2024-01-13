@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { getGameByCode } from '../../services/gameService';
 import { getUserByEmail } from '../../services/userService.js';
 
+import './joinPoll.css';
+
 export default function JoinPoll({setGame_id, setUser_id, setPage}) {
     // Function renders a small form asking for game_code and user_email and a submit button.
     // On submit, the function fetches the game_id from the game_code and the user_id from the user_email.
@@ -47,7 +49,7 @@ export default function JoinPoll({setGame_id, setUser_id, setPage}) {
     
     return (
         <div>
-            <form onSubmit={handleJoinPollFormSubmit}>
+            <form className="poll-form" onSubmit={handleJoinPollFormSubmit}>
                 <label htmlFor="game_code">Game Code:</label>
                 <input type="text" id="game_code" name="game_code" value={joinPollFormData.game_code} onChange={handleJoinPollInputChange}/><br /><br />
                 <label htmlFor="user_email">Email:</label>

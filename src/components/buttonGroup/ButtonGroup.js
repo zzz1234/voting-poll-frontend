@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import Button from '../button/Button.js';
 
 export default function ButtonGroup({onClick}) {
-
-    const [page, setPage] = useState('home');
   
     return (
       <div className="button-group">

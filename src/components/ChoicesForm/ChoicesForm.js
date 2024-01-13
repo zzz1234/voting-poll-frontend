@@ -1,7 +1,4 @@
 // Create a component called ChoicesForm which will be used to render the choices form. Add a "Add Choice" button which when clicked will open a input field where user can enter a choice.
-// Path: voting-machine-frontend/src/components/ChoicesForm/ChoicesForm.js
-
-// Create a component called ChoicesForm which will be used to render the choices form. Add a "Add Choice" button which when clicked will open a input field where user can enter a choice.
 
 import React, { useState } from 'react';
 

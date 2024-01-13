@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import { VoteService } from '../../services/voteService.js';
 
+import './pollForm.css';
+
 export default function PollForm({game_id, user_id}) {
 
     const [game_data, setGame_data] = useState({'game_question': '', 'game_code': ''});
@@ -65,7 +67,12 @@ export default function PollForm({game_id, user_id}) {
     const render_choices = () => {
         let choices = [];
         for (let i=0; i<choices_data.length; i++) {
-            choices.push(<div key={choices_data[i]['choice_id']}><input type="radio" id={choices_data[i]['choice_id']} name="choice" value={choices_data[i]['choice_id']} />{choices_data[i]['choice_value']}</div>);
+            choices.push(
+            <div key={choices_data[i]['choice_id']}>
+                <input type="radio" id={choices_data[i]['choice_id']} name="choice" value={choices_data[i]['choice_id']} />
+                {choices_data[i]['choice_value']}
+                {<input className="comments" type="text" id={`comment${choices_data[i]['choice_id']}`} /> }
+            </div>);
         }
         return choices;
     }
@@ -74,10 +81,11 @@ export default function PollForm({game_id, user_id}) {
     const castVote = (e) => {
         e.preventDefault();
         const choice_id = document.querySelector('input[name="choice"]:checked').value;
+        const comment = document.getElementById(`comment${choice_id}`).value;
         const api_body = {
             'choice_id': choice_id,
             'user_id': user_id,
-            'comments': 'No Reason',
+            'comments': comment,
             'game_id': game_id,
             'priority': 1
         }
@@ -92,7 +100,7 @@ export default function PollForm({game_id, user_id}) {
     }
 
     return (
-        <div>
+        <div className="poll-form">
             <h1>Cast your Vote Now!!!</h1>
             <h2> Your game code is {game_data['game_code']}. Use this code to join the game.</h2>
             <h3 id="game_question">{game_data['game_question']}</h3>
