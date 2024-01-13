@@ -13,7 +13,7 @@ import './ChoicesForm.css';
 export default function ChoicesForm({game_code, nextPageOnSubmit}) {
 
     const [choice_num, setChoice_num] = useState(1);
-    const [choices_list, setChoices_list] = useState([]);
+    const [choices_list, setChoices_list] = useState({0: ''});
 
     const handleChoiceChange = (e) => {
         const { name, value } = e.target;
@@ -24,17 +24,31 @@ export default function ChoicesForm({game_code, nextPageOnSubmit}) {
         console.log(choices_list)
     }
 
+    const handleRemove = (e, key) => {
+        e.preventDefault();
+        let newChoicesList = { ...choices_list }; // Create a copy of the choices_list
+        delete newChoicesList[key]; // Delete the property from the copied object
+        setChoices_list(newChoicesList); // Update the state with the new object
+    }
+
+
     const render_choices = () => {
-        let choices = [];
-        for (let i=0; i<choice_num; i++) {
-            choices.push(<div key={i}><Choice name={i} id={i} onChange={handleChoiceChange}/></div>);
-        }
-        return choices;
+        return Object.keys(choices_list).map((key, index) => {
+            return (
+              <div key={key}>
+                <Choice name={key} id={key} onChange={handleChoiceChange} onRemove={handleRemove}/>
+              </div>
+            );
+          });
     }
 
     const addMoreChoice = (e) => {
         e.preventDefault();
         setChoice_num(choice_num+1);
+        setChoices_list((prevChoices_list) => ({
+            ...prevChoices_list,
+            [choice_num + 1]: '',
+        }));
     }
 
     const handleChoiceFormSubmit = (e) => {

@@ -1,0 +1,18 @@
+.cross {
+    background-color: red; /* Red background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%; /* Circle shape */
+    width: 30px; /* Width of the button */
+    height: 30px; /* Height of the button */
+    line-height: 30px; /* Vertically center the text */
+    transition: background-color 0.3s; /* Animation to change color */
+}
+
+.cross:hover {
+    background-color: darkred; /* Dark red background on hover */
+}
