@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getGameByCode } from '../../services/gameService';
-import { getUserByEmail } from '../../services/userService.js';
+import { getUserByEmail, createUserByEmail } from '../../services/userService.js';
 
 import './joinPoll.css';
 
@@ -34,10 +34,19 @@ export default function JoinPoll({setGame_id, setUser_id, setPage}) {
           getUserByEmail(joinPollFormData.user_email)
         ]).then(async([gameRes, userRes]) => {
           const gameData = await gameRes;
-          const userData = await userRes;
+          let userData = await userRes;
+
+          if (!userData || userData.length === 0) {
+            // User not found, create a new user
+            userData = await createUserByEmail(joinPollFormData.user_email);
+            setUser_id(userData[0]['user_id']); // Set user_id after new user is created
+          }
+          else {
+            setUser_id(userData[0]['user_id']); // Set user_id if user already exists
+          }
       
           setGame_id(gameData[0]['game_id']);
-          setUser_id(userData[0]['user_id']); // Assuming you have a setUserId function to set user_id state variable
+          // setUser_id(userData[0]['user_id']); // Assuming you have a setUserId function to set user_id state variable
     
           console.log("Into the Poll Now!!");
           setPage('poll_form');

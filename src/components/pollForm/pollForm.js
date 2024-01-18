@@ -33,7 +33,7 @@ export default function PollForm({game_id, user_id}) {
             });
         };
         render_question();
-    }, []);
+    }, [game_id, user_id]);
 
     useEffect(() => {
         const set_choices = () => {
