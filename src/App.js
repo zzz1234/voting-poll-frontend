@@ -8,6 +8,8 @@ import ChoicesForm from './components/ChoicesForm/ChoicesForm.js';
 import PollForm from './components/pollForm/pollForm.js';
 import JoinPoll from './components/joinPoll/joinPoll.js';
 import BackButton from './components/backButton/backButton.js';
+import ResultsForm from './components/resultsForm/resultsForm.js';
+import ResultsPieChart from './components/resultsPieChart/resultsPieChart.js';
 
 import { useState } from "react";
 
@@ -26,6 +28,12 @@ function App() {
     }
     else if (path === 'join') {
       setPageWithHistory('join');
+    }
+    else if (path === 'results') {
+      setPageWithHistory('results');
+    }
+    else if (path === 'results_page') {
+      setPageWithHistory('results_page');
     }
     else {
       setPageWithHistory('home');
@@ -51,6 +59,12 @@ function App() {
     }
     else if (page === 'poll_form') {
       return <PollForm game_id={game_id} user_id={user_id}/>;
+    }
+    else if (page === 'results') {
+      return <ResultsForm setGame_id={setGame_id} nextPageOnSubmit={setPageWithHistory}/>
+    }
+    else if (page == 'results_page') {
+      return <ResultsPieChart game_id={game_id}/>
     }
     else {
       return <ButtonGroup onClick={handleClick}/>;

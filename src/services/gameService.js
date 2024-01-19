@@ -24,4 +24,14 @@ export const getGameByCode = (gameCode) => {
       },
     }).then(response => response.json());
   }
-  
+
+
+export const getGameResults = (gameId) => {
+  const gameApiUrl = 'http://localhost:8000/api/game/' + gameId + '/results';
+  return fetch(gameApiUrl, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  }).then(response => response.json());
+}
