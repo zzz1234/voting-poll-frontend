@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getGameByCode } from '../../services/gameService';
-import { getUserByEmail, createUserByEmail } from '../../services/userService.js';
+import { getorCreateUserByEmail} from '../../services/userService.js';
 
 import './joinPoll.css';
 
@@ -31,19 +31,12 @@ export default function JoinPoll({setGame_id, setUser_id, setPage}) {
     
         Promise.all([
           getGameByCode(joinPollFormData.game_code),
-          getUserByEmail(joinPollFormData.user_email)
+          getorCreateUserByEmail(joinPollFormData.user_email)
         ]).then(async([gameRes, userRes]) => {
           const gameData = await gameRes;
           let userData = await userRes;
 
-          if (!userData || userData.length === 0) {
-            // User not found, create a new user
-            userData = await createUserByEmail(joinPollFormData.user_email);
-            setUser_id(userData[0]['user_id']); // Set user_id after new user is created
-          }
-          else {
-            setUser_id(userData[0]['user_id']); // Set user_id if user already exists
-          }
+          setUser_id(userData[0]['user_id']);
       
           setGame_id(gameData[0]['game_id']);
           // setUser_id(userData[0]['user_id']); // Assuming you have a setUserId function to set user_id state variable

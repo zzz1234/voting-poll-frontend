@@ -1,0 +1,6 @@
+.pie-chart-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* You might need to adjust this depending on your layout */
+  }

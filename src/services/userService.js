@@ -23,3 +23,15 @@ export const createUserByEmail = (userEmail) => {
       console.error('Error:', error);
     });
   }
+
+
+export function getorCreateUserByEmail(userEmail) {
+  return getUserByEmail(userEmail)
+  .then(user => {
+    if (user && user.length > 0) {
+      return user;
+    } else {
+      return createUserByEmail(userEmail);
+    }
+  });
+}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { VoteService } from '../../services/voteService.js';
+import { VoteService, alreadyVotedService } from '../../services/voteService.js';
 
 import './pollForm.css';
 
@@ -8,6 +8,7 @@ export default function PollForm({game_id, user_id}) {
 
     const [game_data, setGame_data] = useState({'game_question': '', 'game_code': ''});
     const [choices_data, setChoices_data] = useState([]);
+    
     useEffect(() => {
         console.log('useEffect is running...');
         const render_question =  async () => {
@@ -57,10 +58,24 @@ export default function PollForm({game_id, user_id}) {
     }, []);
 
     // Write a function render_vote_button() which renders a vote button. The vote button is rendered only if the user_id value is not null.
-    const render_vote_button = () => {
-        if (user_id != null) {
+    const Render_vote_button = () => {
+        const [alreadyVoted, setAlreadyVoted] = useState(null);
+        
+        useEffect(() => {
+            alreadyVotedService(user_id, game_id)
+              .then(result => {
+                setAlreadyVoted(result);
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
+          }, [user_id, game_id]);
+
+          if (alreadyVoted === true) {
+            return <p>Already Voted</p>;
+          } else if (user_id && alreadyVoted === false) {
             return <button>Vote</button>;
-        }
+          }
     }
 
     // Add a function render_choices which traverses through the choices_data array and renders the choices in a list and each choice with a radio button.
@@ -95,7 +110,8 @@ export default function PollForm({game_id, user_id}) {
             alert("Vote casted successfully!");
         })
         .catch((error) => {
-            console.error('Error:', error);
+            alert(error);
+            console.error('Error', error);
         });
     }
 
@@ -107,7 +123,7 @@ export default function PollForm({game_id, user_id}) {
             <form onSubmit={castVote}>
                 {render_choices()}
                 <br />
-            {render_vote_button()}
+            {Render_vote_button()}
             </form>
         </div>
     );
