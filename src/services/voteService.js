@@ -11,6 +11,7 @@ export const VoteService = (api_body) => {
   })
   .then(response => {
     if (response.status === 400) {
+      console.log(response);
       throw new Error(response.json());
     }
     return response.json()

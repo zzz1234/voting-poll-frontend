@@ -8,6 +8,7 @@ export default function PollForm({game_id, user_id}) {
 
     const [game_data, setGame_data] = useState({'game_question': '', 'game_code': ''});
     const [choices_data, setChoices_data] = useState([]);
+    const [selectedOptions, setSelectedOptions] = useState([]);
     
     useEffect(() => {
         console.log('useEffect is running...');
@@ -74,40 +75,74 @@ export default function PollForm({game_id, user_id}) {
           if (alreadyVoted === true) {
             return <p>Already Voted</p>;
           } else if (user_id && alreadyVoted === false) {
-            return <button>Vote</button>;
+            return <button disabled={selectedOptions.length !== game_data.no_of_votes}>Vote</button>;
           }
     }
 
+    const handleOptionSelect = (optionId) => {
+        const existingOption = selectedOptions.find((o) => o.choice_id === optionId);
+
+        if (existingOption) {
+        // Deselect option if it's already selected
+        const updatedOptions = selectedOptions.filter((o) => o.choice_id !== optionId);
+        
+        const updatedOptionsWithPriority = updatedOptions.map((o, i) => ({
+            choice_id: o.choice_id,
+            priority: i + 1,
+          }));
+
+        setSelectedOptions(updatedOptionsWithPriority);
+        } else {
+        // Select the option and assign a priority
+        const priority = selectedOptions.length + 1;
+        setSelectedOptions([...selectedOptions, { choice_id: optionId, priority }]);
+        }
+        console.log(selectedOptions);
+      };
+
     // Add a function render_choices which traverses through the choices_data array and renders the choices in a list and each choice with a radio button.
     const render_choices = () => {
-        let choices = [];
-        for (let i=0; i<choices_data.length; i++) {
-            choices.push(
-            <div key={choices_data[i]['choice_id']}>
-                <input type="radio" id={choices_data[i]['choice_id']} name="choice" value={choices_data[i]['choice_id']} />
-                {choices_data[i]['choice_value']}
-                {<input className="comments" type="text" id={`comment${choices_data[i]['choice_id']}`} /> }
-            </div>);
-        }
-        return choices;
+        return choices_data.map((option) => (
+            <div key={option.choice_id}>
+                {selectedOptions.some((o) => o.choice_id === option.choice_id) && (
+                <span><b>{selectedOptions.find((o) => o.choice_id === option.choice_id).priority}</b></span>
+                )}
+                {!selectedOptions.some((o) => o.choice_id === option.choice_id) && <span style={{ visibility: 'hidden' }}>0</span>}
+                <label>
+                    <input 
+                    type="checkbox"
+                    onChange={() => handleOptionSelect(option.choice_id)}
+                    checked={selectedOptions.some((o) => o.choice_id === option.choice_id)}
+                    />
+                    {option.choice_value}
+                </label>
+                {<input className="comments" type="text" id={`comment${option.choice_id}`} /> }
+            </div>
+        ))
+        // return choices;
     }
 
     // Add a function castVote which fetches the choice_id from the radio button, fetches user_id and sends a POST request to the backend to cast the vote.
     const castVote = (e) => {
         e.preventDefault();
-        const choice_id = document.querySelector('input[name="choice"]:checked').value;
-        const comment = document.getElementById(`comment${choice_id}`).value;
-        const api_body = {
-            'choice_id': choice_id,
-            'user_id': user_id,
-            'comments': comment,
-            'game_id': game_id,
-            'priority': 1
-        }
-        VoteService(api_body)
+        const updatedSelectedOptions = selectedOptions.map(option => {
+            const comment = document.getElementById(`comment${option.choice_id}`).value;
+            return {
+                ...option,
+                "comments": comment,
+                "user_id": user_id,
+                "game_id": game_id
+            };
+        });
+        console.log(updatedSelectedOptions);
+        const promises = updatedSelectedOptions.map(element => {
+            return VoteService(element);
+        })
+        Promise.all(promises)
         .then(data => {
             console.log('Success:', data);
-            alert("Vote casted successfully!");
+            // setAlreadyVoted(true);
+            // alert("Vote casted successfully!");
         })
         .catch((error) => {
             alert(error);
@@ -120,6 +155,7 @@ export default function PollForm({game_id, user_id}) {
             <h1>Cast your Vote Now!!!</h1>
             <h2> Your game code is {game_data['game_code']}. Use this code to join the game.</h2>
             <h3 id="game_question">{game_data['game_question']}</h3>
+            <h4 id="vote_count"> You have to cast {game_data['no_of_votes']} votes.</h4>
             <form onSubmit={castVote}>
                 {render_choices()}
                 <br />
