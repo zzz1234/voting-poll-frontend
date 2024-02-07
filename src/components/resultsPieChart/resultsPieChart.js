@@ -52,7 +52,7 @@ export default function ResultsPieChart({game_id}) {
                     Generate Summary 
                 </button>
                 {loading && <div className="loader"></div>}
-                {summary && <p>{summary.summary}</p>}
+                {summary && <div dangerouslySetInnerHTML={{ __html: summary.summary }} />}
             </div>
         </div>
     );

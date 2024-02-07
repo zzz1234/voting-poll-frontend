@@ -82,7 +82,7 @@ function App() {
       <Navbar />
       {renderPage()}
       {renderBackButton()}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
