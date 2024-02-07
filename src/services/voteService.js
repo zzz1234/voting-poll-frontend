@@ -1,5 +1,6 @@
+import { BASE_API_URL } from '../constants/apiConstants';
 
-const api_url = 'http://localhost:8000/api/vote';
+const api_url = `${BASE_API_URL}/api/vote`;
 
 export const VoteService = (api_body) => {
   return fetch(api_url, {

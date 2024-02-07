@@ -1,6 +1,7 @@
+import { BASE_API_URL } from '../constants/apiConstants';
 
 export const createGame = (formData) => {
-  const api_url = 'http://localhost:8000/api/create-game';
+  const api_url = `${BASE_API_URL}/api/create-game`;
   return fetch(api_url, {
     method: 'POST',
     body: JSON.stringify(formData),
@@ -16,7 +17,7 @@ export const createGame = (formData) => {
 
 
 export const getGameByCode = (gameCode) => {
-    const gameApiUrl = 'http://localhost:8000/api/game/game-code/' + gameCode;
+    const gameApiUrl = `${BASE_API_URL}/api/game/game-code/` + gameCode;
     return fetch(gameApiUrl, {
       method: 'GET',
       headers: {
@@ -27,7 +28,7 @@ export const getGameByCode = (gameCode) => {
 
 
 export const getGameResults = (gameId) => {
-  const gameApiUrl = 'http://localhost:8000/api/game/' + gameId + '/results';
+  const gameApiUrl = `${BASE_API_URL}/api/game/` + gameId + '/results';
   return fetch(gameApiUrl, {
     method: 'GET',
     headers: {
@@ -38,7 +39,7 @@ export const getGameResults = (gameId) => {
 
 
 export const getGameSummary = (gameId) => {
-  const gameApiUrl = 'http://localhost:8000/api/game/' + gameId + '/summary';
+  const gameApiUrl = `${BASE_API_URL}/api/game/` + gameId + '/summary';
   return fetch(gameApiUrl, {
     method: 'GET',
     headers: {

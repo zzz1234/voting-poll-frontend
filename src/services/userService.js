@@ -1,6 +1,7 @@
+import { BASE_API_URL } from '../constants/apiConstants';
 
 export const getUserByEmail = (userEmail) => {
-    const userApiUrl = 'http://localhost:8000/api/user/user-email/' + userEmail;
+    const userApiUrl = `${BASE_API_URL}/api/user/user-email/` + userEmail;
     return fetch(userApiUrl, {
       method: 'GET',
       headers: {
@@ -11,7 +12,7 @@ export const getUserByEmail = (userEmail) => {
 
 
 export const createUserByEmail = (userEmail) => {
-    const userApiUrl = 'http://localhost:8000/api/user';
+    const userApiUrl = `${BASE_API_URL}/api/user`;
     return fetch(userApiUrl, {
       method: 'POST',
       headers: {
