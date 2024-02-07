@@ -23,6 +23,7 @@ export default function ResultsForm({setGame_id, nextPageOnSubmit}) {
 
     const handleResultPollInputChange = (e) => {
         const { name, value } = e.target;
+        console.log(name);
         setGame_code(value);
     }
 

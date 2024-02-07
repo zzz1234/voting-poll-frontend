@@ -56,7 +56,7 @@ export default function PollForm({game_id, user_id}) {
             });
         };
         set_choices();
-    }, []);
+    }, [game_id]);
 
     // Write a function render_vote_button() which renders a vote button. The vote button is rendered only if the user_id value is not null.
     const Render_vote_button = () => {
@@ -70,7 +70,7 @@ export default function PollForm({game_id, user_id}) {
               .catch(error => {
                 console.error('Error:', error);
               });
-          }, [user_id, game_id]);
+          }, []);
 
           if (alreadyVoted === true) {
             return <p>Already Voted</p>;

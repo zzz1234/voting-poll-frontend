@@ -63,7 +63,7 @@ function App() {
     else if (page === 'results') {
       return <ResultsForm setGame_id={setGame_id} nextPageOnSubmit={setPageWithHistory}/>
     }
-    else if (page == 'results_page') {
+    else if (page === 'results_page') {
       return <ResultsPieChart game_id={game_id}/>
     }
     else {
@@ -82,7 +82,7 @@ function App() {
       <Navbar />
       {renderPage()}
       {renderBackButton()}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
