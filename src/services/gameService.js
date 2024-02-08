@@ -47,3 +47,14 @@ export const getGameSummary = (gameId) => {
     },
   }).then(response => response.json());
 }
+
+
+export const getGameById = (gameId) => {
+  const gameApiUrl = `${BASE_API_URL}/api/game/` + gameId;
+  return fetch(gameApiUrl, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  }).then(response => response.json());
+}

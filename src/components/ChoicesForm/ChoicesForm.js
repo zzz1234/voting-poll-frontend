@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { addChoice } from '../../services/addChoiceService.js';
+import { addChoice } from '../../services/choiceService.js';
 
 import Choice from '../choice/choice.js';
 import './ChoicesForm.css';

@@ -15,3 +15,14 @@ export const addChoice = (api_body) => {
     console.error('Error:', error);
   });
 }
+
+
+export const getChoicesByGameId = (game_id) => {
+  const choiceApiUrl = `${BASE_API_URL}/api/game/` + game_id + '/choices';
+  return fetch(choiceApiUrl, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  }).then(response => response.json());
+}

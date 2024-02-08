@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 
 import { VoteService, alreadyVotedService } from '../../services/voteService.js';
 
+import { getChoicesByGameId } from '../../services/choiceService.js';
+
+import { getGameById } from "../../services/gameService.js";
+
+
 import './pollForm.css';
 
 export default function PollForm({game_id, user_id}) {
@@ -16,13 +21,7 @@ export default function PollForm({game_id, user_id}) {
             // e.preventDefault();
             console.log(game_id)
             console.log(user_id)
-            let game_url = "http://127.0.0.1:8000/api/game/" + game_id;
-            fetch(game_url, {
-                method: 'GET',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-            }).then(response => response.json())
+            getGameById(game_id, user_id)
             .then(data => {
                 console.log('Game data:', data);
                 setGame_data(data);
@@ -39,13 +38,7 @@ export default function PollForm({game_id, user_id}) {
 
     useEffect(() => {
         const set_choices = () => {
-            const choices_url = "http://127.0.0.1:8000/api/game/" + game_id + "/choices";
-            fetch(choices_url, {
-                method: 'GET',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-            }).then(response => response.json())
+            getChoicesByGameId(game_id)
             .then(data => {
                 console.log('Choices data:', data);
                 setChoices_data(data);
