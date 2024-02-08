@@ -2,7 +2,7 @@ import './App.css';
 
 import ButtonGroup from './components/buttonGroup/ButtonGroup.js';
 import Navbar from './components/navbar/Navbar.js';
-import Footer from './components/footer/Footer.js';
+// import Footer from './components/footer/Footer.js';
 import NewPollForm from './components/newPollForm/NewPollForm.js';
 import ChoicesForm from './components/ChoicesForm/ChoicesForm.js';
 import PollForm from './components/pollForm/pollForm.js';
