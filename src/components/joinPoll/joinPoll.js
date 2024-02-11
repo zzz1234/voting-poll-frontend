@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getGameByCode } from '../../services/gameService';
 import { getorCreateUserByEmail} from '../../services/userService.js';
+import Loader from '../loader/loader.js';
 
 import './joinPoll.css';
 
@@ -15,6 +16,7 @@ export default function JoinPoll({setGame_id, setUser_id, setPage}) {
         game_code: '',
         user_email: '',
       });
+      const [loading, setLoading] = React.useState(false);
     
       const handleJoinPollInputChange = (e) => {
         const { name, value } = e.target;
@@ -28,6 +30,7 @@ export default function JoinPoll({setGame_id, setUser_id, setPage}) {
       const handleJoinPollFormSubmit = (e) => {
         e.preventDefault()
         console.log(joinPollFormData);
+        setLoading(true);
     
         Promise.all([
           getGameByCode(joinPollFormData.game_code),
@@ -40,6 +43,7 @@ export default function JoinPoll({setGame_id, setUser_id, setPage}) {
       
           setGame_id(gameData[0]['game_id']);
           // setUser_id(userData[0]['user_id']); // Assuming you have a setUserId function to set user_id state variable
+          setLoading(false);
     
           console.log("Into the Poll Now!!");
           setPage('poll_form');
@@ -57,6 +61,7 @@ export default function JoinPoll({setGame_id, setUser_id, setPage}) {
                 <label htmlFor="user_email">Email:</label>
                 <input type="text" id="user_email" name="user_email" value={joinPollFormData.user_email} onChange={handleJoinPollInputChange}/><br /><br />
                 <input type="submit" value="Submit" />
+                {loading && <Loader />}
             </form>
         </div>
     );

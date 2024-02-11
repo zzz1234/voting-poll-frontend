@@ -6,6 +6,8 @@ import { getChoicesByGameId } from '../../services/choiceService.js';
 
 import { getGameById } from "../../services/gameService.js";
 
+import Loader from '../loader/loader.js';
+
 
 import './pollForm.css';
 
@@ -14,13 +16,14 @@ export default function PollForm({game_id, user_id}) {
     const [game_data, setGame_data] = useState({'game_question': '', 'game_code': ''});
     const [choices_data, setChoices_data] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
+    const [loading, setLoading] = useState(false);
     
     useEffect(() => {
         console.log('useEffect is running...');
         const render_question =  async () => {
             // e.preventDefault();
-            console.log(game_id)
-            console.log(user_id)
+            console.log(game_id);
+            console.log(user_id);
             getGameById(game_id, user_id)
             .then(data => {
                 console.log('Game data:', data);
@@ -128,6 +131,7 @@ export default function PollForm({game_id, user_id}) {
             };
         });
         console.log(updatedSelectedOptions);
+        setLoading(true);
         const promises = updatedSelectedOptions.map(element => {
             return VoteService(element);
         })
@@ -135,7 +139,8 @@ export default function PollForm({game_id, user_id}) {
         .then(data => {
             console.log('Success:', data);
             // setAlreadyVoted(true);
-            // alert("Vote casted successfully!");
+            alert("Vote casted successfully!");
+            setLoading(false);
         })
         .catch((error) => {
             alert(error);
@@ -154,6 +159,7 @@ export default function PollForm({game_id, user_id}) {
                 <br />
             {Render_vote_button()}
             </form>
+            {loading && <Loader />}
         </div>
     );
 }

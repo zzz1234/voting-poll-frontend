@@ -7,10 +7,13 @@ import { addChoice } from '../../services/choiceService.js';
 import Choice from '../choice/choice.js';
 import './ChoicesForm.css';
 
+import Loader from '../loader/loader.js';
+
 export default function ChoicesForm({game_code, nextPageOnSubmit}) {
 
     const [choice_num, setChoice_num] = useState(1);
     const [choices_list, setChoices_list] = useState({0: ''});
+    const [loading, setLoading] = React.useState(false);
 
     const handleChoiceChange = (e) => {
         const { name, value } = e.target;
@@ -54,10 +57,12 @@ export default function ChoicesForm({game_code, nextPageOnSubmit}) {
             'choices': Object.values(choices_list),
             'game_id': game_code,
         }
+        setLoading(true);
         addChoice(api_body)
         .then(data => {
             console.log('Success:', data);
             nextPageOnSubmit('poll_form');
+            setLoading(false);
             alert("Choices added successfully!");
         })
         .catch((error) => {
@@ -73,6 +78,7 @@ export default function ChoicesForm({game_code, nextPageOnSubmit}) {
             {render_choices()}
             <input className="submit-button" type="submit" value="+ Add More" onClick={addMoreChoice} />
             <input className="submit-button" type="submit" value="Submit" />
+            {loading && <Loader />}
             </form>
         </div>
     );

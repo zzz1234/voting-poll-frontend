@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './NewPollForm.css';
 
 import { createGame } from '../../services/gameService.js';
+import Loader from '../loader/loader.js';
 
 export default function NewPollForm({setGame_id, setPage}) {
 
@@ -13,6 +14,7 @@ export default function NewPollForm({setGame_id, setPage}) {
     no_of_votes: '',
     // Add more fields as needed
   });
+  const [loading, setLoading] = React.useState(false);
 
   // const [response, setResponse] = useState(null);
 
@@ -27,12 +29,14 @@ export default function NewPollForm({setGame_id, setPage}) {
   const handleFormSubmit = (e) => {
       e.preventDefault()
       console.log(formData);
+      setLoading(true);
       createGame(formData)
       .then(data => {
           console.log('Success:', data);
           setGame_id(data[0]['game_id']);
           console.log(data);
           alert("Poll created successfully!");
+          setLoading(false);
           setPage('add_choices');
       })
       .catch((error) => {
@@ -54,6 +58,7 @@ export default function NewPollForm({setGame_id, setPage}) {
           <input className="input-val" type="number" id="votes-per-person" name="no_of_votes" value={formData.no_of_votes} onChange={handleInputChange}/>
           <br />
           <input className="submit-button" type="submit" value="Submit" />
+          {loading && <Loader />}
         </form>
       </div>
     );

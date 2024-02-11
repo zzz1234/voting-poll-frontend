@@ -2,6 +2,7 @@ import { PieChart, Pie, Tooltip, Cell } from 'recharts';
 import React from 'react';
 
 import { getGameResults, getGameSummary } from '../../services/gameService';
+import Loader from '../loader/loader.js';
 import './resultsPieChart.css';
 
 export default function ResultsPieChart({game_id}) {
@@ -51,7 +52,7 @@ export default function ResultsPieChart({game_id}) {
                 <button onClick={getGameSummaryOnClick} disabled={loading}> 
                     Generate Summary 
                 </button>
-                {loading && <div className="loader"></div>}
+                {loading && <Loader />}
                 {summary && <div dangerouslySetInnerHTML={{ __html: summary.summary }} />}
             </div>
         </div>
