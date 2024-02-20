@@ -5,3 +5,68 @@
     justify-content: center;
     margin: 10px;
 }
+
+.heading {
+    color: #fff;
+}
+
+.sub-heading {
+    color: #fff;
+}
+
+.question {
+    color: #fff;
+}
+
+label {
+    flex: 0 0 15px; /* Fixed width for labels */
+    margin-right: 10px;
+    color: #fff;
+  }
+  
+  input {
+    flex: 1; /* Take remaining space */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    margin: 20px;
+  }
+
+  .submit-button {
+    width: 200px;
+    padding: 15px 0;
+    border: none;
+    border-radius: 20px;
+    background-color: #555;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #777;
+  }
+
+
+  .submit-button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
+
+  td {
+    width: 70px; /* Adjust the width as needed */
+    padding: 10px;
+    /* border: 1px solid #ccc; Optional: Add border for visualization */
+  }
+
+  .input-radio {
+    width: 20px;
+  }
+
+  .priority-label {
+    text-align: right;
+    color: #fff;
+  }

@@ -48,15 +48,20 @@ export default function NewPollForm({setGame_id, setPage}) {
       <div className="new-poll-form">
         <h1 className="new-poll-form-title">Create a New Poll</h1>
         <form className='new-poll' onSubmit={handleFormSubmit}>
-          <label className="input-name" htmlFor="poll-name">Poll Name:</label>
-          <input className="input-val" type="text" id="poll-name" name="game_name" value={formData.game_name} onChange={handleInputChange}/>
-          <br />
-          <label className='input-name' htmlFor='poll-question'>Poll Question: </label>
-          <input className="input-val" type="text" id="poll-question" name="game_question" value={formData.game_question} onChange={handleInputChange}/>
-          <br />
-          <label className="input-name" htmlFor="votes-per-person">No of votes per person:</label>
-          <input className="input-val" type="number" id="votes-per-person" name="no_of_votes" value={formData.no_of_votes} onChange={handleInputChange}/>
-          <br />
+          <table>
+            <tr>
+              <td><label className="input-name" htmlFor="poll-name">Poll Name:</label></td>
+              <td><input className="input-val" type="text" id="poll-name" name="game_name" value={formData.game_name} onChange={handleInputChange}/></td>
+            </tr>
+            <tr>
+              <td><label className='input-name' htmlFor='poll-question'>Poll Question: </label></td>
+              <td><input className="input-val" type="text" id="poll-question" name="game_question" value={formData.game_question} onChange={handleInputChange}/></td>
+            </tr>
+            <tr>
+              <td><label className="input-name" htmlFor="votes-per-person">No of votes per person:</label></td>
+              <td><input className="input-val" type="number" id="votes-per-person" name="no_of_votes" value={formData.no_of_votes} onChange={handleInputChange}/></td>
+            </tr>
+          </table>
           <input className="submit-button" type="submit" value="Submit" />
           {loading && <Loader />}
         </form>

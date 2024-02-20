@@ -40,7 +40,7 @@ export default function ResultsPieChart({game_id}) {
         <div>
             <div className='pie-chart-results'>
             <PieChart width={400} height={400}>
-                <Pie dataKey="value" isAnimationActive={false} data={data} cx={200} cy={200} outerRadius={80} label >
+                <Pie className='sector' dataKey="value" isAnimationActive={false} data={data} cx={200} cy={200} outerRadius={80} label >
                 {
                     data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
                 }
@@ -48,8 +48,8 @@ export default function ResultsPieChart({game_id}) {
                 <Tooltip />
             </PieChart>
             </div>
-            <div>
-                <button onClick={getGameSummaryOnClick} disabled={loading}> 
+            <div className='summary'>
+                <button className='button-generate-summary' onClick={getGameSummaryOnClick} disabled={loading}> 
                     Generate Summary 
                 </button>
                 {loading && <Loader />}

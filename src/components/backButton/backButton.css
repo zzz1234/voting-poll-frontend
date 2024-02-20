@@ -1,6 +1,6 @@
 .backButton {
     font-weight: bold; /* Thick font */
-    background-color: #4CAF50; /* Green background */
+    background-color: #555; /* Green background */
     border: none; /* Remove border */
     color: white; /* White text */
     text-align: center;
@@ -20,5 +20,5 @@
 }
 
 .backButton:hover {
-    background-color: #45a049; /* Green background on hover */
+    background-color: #777; /* Green background on hover */
 }

@@ -67,11 +67,14 @@ export default function PollForm({game_id, user_id}) {
                 console.error('Error:', error);
               });
           }, []);
-
-          if (alreadyVoted === true) {
-            return <p>Already Voted</p>;
+          if(user_id === null) {
+            return <button className="submit-button" disabled={true}>Join Poll to Vote</button>
+            // return <p>Please Login</p>;
+          }
+          else if (alreadyVoted === true) {
+            return <button className="submit-button" disabled={true}>Already Voted</button>;
           } else if (user_id && alreadyVoted === false) {
-            return <button disabled={selectedOptions.length !== game_data.no_of_votes}>Vote</button>;
+            return <button className="submit-button"  disabled={selectedOptions.length !== game_data.no_of_votes}>Vote</button>;
           }
     }
 
@@ -99,21 +102,24 @@ export default function PollForm({game_id, user_id}) {
     // Add a function render_choices which traverses through the choices_data array and renders the choices in a list and each choice with a radio button.
     const render_choices = () => {
         return choices_data.map((option) => (
-            <div key={option.choice_id}>
-                {selectedOptions.some((o) => o.choice_id === option.choice_id) && (
+            
+            <div className="choices" key={option.choice_id}><tr>
+                <td  className="priority-label">{selectedOptions.some((o) => o.choice_id === option.choice_id) && (
                 <span><b>{selectedOptions.find((o) => o.choice_id === option.choice_id).priority}</b></span>
                 )}
                 {!selectedOptions.some((o) => o.choice_id === option.choice_id) && <span style={{ visibility: 'hidden' }}>0</span>}
-                <label>
-                    <input 
+                </td>
+                <td>
+                    <input className="input-radio"
                     type="checkbox"
                     onChange={() => handleOptionSelect(option.choice_id)}
                     checked={selectedOptions.some((o) => o.choice_id === option.choice_id)}
-                    />
-                    {option.choice_value}
-                </label>
-                {<input className="comments" type="text" id={`comment${option.choice_id}`} /> }
-            </div>
+                    /></td>
+                   <td><label> {option.choice_value}
+                </label></td>
+                <td>{<input className="comments" type="text" id={`comment${option.choice_id}`} /> }</td>
+                </tr></div>
+            
         ))
         // return choices;
     }
@@ -150,12 +156,12 @@ export default function PollForm({game_id, user_id}) {
 
     return (
         <div className="poll-form">
-            <h1>Cast your Vote Now!!!</h1>
-            <h2> Your game code is {game_data['game_code']}. Use this code to join the game.</h2>
-            <h3 id="game_question">{game_data['game_question']}</h3>
-            <h4 id="vote_count"> You have to cast {game_data['no_of_votes']} votes.</h4>
+            <h1 className="heading">Cast your Vote Now!!!</h1>
+            <h2 className="sub-heading"> Your game code is {game_data['game_code']}. Use this code to join the game.</h2>
+            <h3 className="question" id="game_question">{game_data['game_question']}</h3>
+            <h4 className="sub-heading" id="vote_count"> You have to cast {game_data['no_of_votes']} votes.</h4>
             <form onSubmit={castVote}>
-                {render_choices()}
+                <table>{render_choices()}</table>
                 <br />
             {Render_vote_button()}
             </form>

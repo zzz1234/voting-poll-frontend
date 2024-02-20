@@ -28,11 +28,15 @@ export default function ResultsForm({setGame_id, nextPageOnSubmit}) {
     }
 
     return (
-        <div>
+        <div className="result-form-container">
             <form className="result-form" onSubmit={handleResultPollFormSubmit}>
-                <label htmlFor="game_code">Game Code:</label>
-                <input type="text" id="game_code" name="game_code" value={game_code} onChange={handleResultPollInputChange}/><br />
-                <input className="button-green" type="submit" value="Submit" />
+            <table>
+            <tr>
+              <td><label htmlFor="game_code">Game Code:</label></td>
+              <td><input type="text" id="game_code" name="game_code" value={game_code} onChange={handleResultPollInputChange}/></td>
+            </tr>
+            </table>
+            <input className="submit-button" type="submit" value="Submit" />
             </form>
         </div>
     );

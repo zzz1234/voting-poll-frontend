@@ -4,4 +4,28 @@
     align-items: center;
     height: 100%; /* You might need to adjust this depending on your layout */
   }
+
+  .sector:hover {
+    fill: #666; /* Change color on hover */
+    transition: fill 0.2s ease-in-out; /* Smooth color transition */
+  }
   
+  .button-generate-summary {
+    width: 200px;
+    padding: 15px 0;
+    border: none;
+    border-radius: 20px;
+    background-color: #555;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-generate-summary {
+    background-color: #777;
+  }
+
+  .summary {
+    color: #fff;
+  }

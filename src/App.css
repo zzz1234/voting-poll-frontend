@@ -1,5 +1,10 @@
-.navbar {
+body {
   background-color: #333;
+}
+
+.navbar {
+  /* background: linear-gradient(to right, #000000, #808080); */
+  background-color: #222;
   color: #fff;
   padding: 5px;
 }
@@ -10,22 +15,28 @@
 }
 
 .button-green {
-  background-color: #4CAF50;
+  width: 300px; /* Fixed width for all buttons */
+  padding: 15px 30px;
+  margin: 10px 0;
   border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 5px;
-  margin: 10px;
+  border-radius: 20px;
+  background-color: #555;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-green:hover {
+  background-color: #777;
 }
 
 /* Add CSS for button-group class which has multiple buttons in it. Make it center align and add some margin between buttons */
 .button-group {
-  text-align: center;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
 /* Add CSS for class footer to keep it at the bottom of the page, covers the entire width of the page and has some padding */
