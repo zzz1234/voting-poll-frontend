@@ -10,6 +10,8 @@ import JoinPoll from './components/joinPoll/joinPoll.js';
 import BackButton from './components/backButton/backButton.js';
 import ResultsForm from './components/resultsForm/resultsForm.js';
 import ResultsPieChart from './components/resultsPieChart/resultsPieChart.js';
+import SignUp from './components/signUp/signUp.js';
+import SignIn from './components/signIn/signIn.js';
 
 import { useState } from "react";
 
@@ -22,6 +24,7 @@ function App() {
   const [historyStack, setHistoryStack] = useState(['home']);
 
   // Create a function handleClick which when clicked  redirects to the create or join page.
+
   const handleClick = (path) => {
     if (path === 'create') {
       setPageWithHistory('create');
@@ -34,6 +37,12 @@ function App() {
     }
     else if (path === 'results_page') {
       setPageWithHistory('results_page');
+    }
+    else if (path === 'signup') {
+      setPageWithHistory('signup'); 
+    }
+    else if (path === 'signin') {
+      setPageWithHistory('signin');
     }
     else {
       setPageWithHistory('home');
@@ -66,6 +75,12 @@ function App() {
     else if (page === 'results_page') {
       return <ResultsPieChart game_id={game_id}/>
     }
+    else if (page === 'signup') {
+      return <SignUp/>
+    }
+    else if (page === 'signin') {
+      return <SignIn/>
+    }
     else {
       return <ButtonGroup onClick={handleClick}/>;
     }
@@ -79,7 +94,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar onClick={handleClick}/>
       {renderPage()}
       {renderBackButton()}
       {/* <Footer /> */}
